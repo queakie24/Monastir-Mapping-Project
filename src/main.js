@@ -1,26 +1,26 @@
-// Create the map
+//Create the map on Manhattan
 const map = L.map('map').setView([40.715, -73.985], 15);
 
-// Add the OpenStreetMap tile layer
+//Add the OpenStreetMap tile layer
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-// Load SQL.js & your SQLite database
+//Load SQL.js & SQLite database
 async function initDatabase() {
-  // Point locateFile to your local lib folder containing sql-wasm.wasm
+  //Point locateFile to your local lib folder containing sql-wasm.wasm
   const SQL = await initSqlJs({
     locateFile: file => `./lib/${file}`
   });
 
-  // Fetch your SQLite file
+  //Fetch SQLite file
   const response = await fetch('./database/testdb.sqlite');
   const buffer = await response.arrayBuffer();
   const db = new SQL.Database(new Uint8Array(buffer));
 
-  // Example Query: Retrieve points from the database
-  const stmt = db.prepare("SELECT addressID, addressName, latitude, longitude, city FROM addresses");
+  //Retrieve address points from the database (test for retrieving all, and only from one city)
+  const stmt = db.prepare("SELECT addressID, addressName, latitude, longitude, city FROM addresses WHERE city = 'New York City'");
 
   while (stmt.step()) {
     const row = stmt.getAsObject();
