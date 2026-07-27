@@ -1,3 +1,7 @@
+//Global Variables
+let currentCity = 'New York City';
+let currentYear = 1920;
+
 //Create the map on Manhattan
 const map = L.map('map').setView([40.715, -73.985], 15);
 
@@ -7,7 +11,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-//Load SQL.js & SQLite database
+//Load SQL.js & SQLite database -- Try to edit this function to load any set of points from a selected city and year
 async function initDatabase() {
   //Point locateFile to your local lib folder containing sql-wasm.wasm
   const SQL = await initSqlJs({
