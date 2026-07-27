@@ -1,0 +1,77 @@
+CREATE TABLE addresses (
+    addressID INTEGER PRIMARY KEY AUTOINCREMENT,
+    addressName TEXT NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    city TEXT NOT NULL
+);
+
+CREATE TABLE person (
+    personID TEXT PRIMARY KEY,
+    firstName TEXT,
+    lastName TEXT,
+    birthYear INT,
+    birthPlace TEXT,
+    photo TEXT,
+    notes TEXT
+);
+
+CREATE TABLE livedIn (
+    personID TEXT,
+    addressID INTEGER,
+    familyID TEXT,
+    relationToHead TEXT,
+    year INT,
+    occupation TEXT,
+    PRIMARY KEY (personID, addressID),
+    FOREIGN KEY (personID) REFERENCES person(personID),
+    FOREIGN KEY (addressID) REFERENCES addresses(addressID)
+);
+
+INSERT INTO addresses (addressName, latitude, longitude, city) VALUES
+('101 Allen St', 40.71897567, -73.99089392, 'New York City'),
+('135 Orchard St', 40.71989964, -73.98948723, 'New York City'),
+('180 Orchard St', 40.72177134, -73.98812288, 'New York City'),
+('182/184 Orchard St', 40.72182718, -73.98870693, 'New York City'),
+('145 Orchard St', 40.72046138, -73.98917014, 'New York City'),
+('127 Eldridge St', 40.71881549, -73.99174918, 'New York City'),
+('132 Eldridge St', 40.71877103, -73.99151968, 'New York City'),
+('65 Rivington St', 40.72049982, -73.99004228, 'New York City'),
+('48 Allen St', 40.716558, -73.99143614, 'New York City'),
+('37 1/2 Allen St', 40.71615517, -73.99225049, 'New York City');
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, photo, notes) VALUES
+('RAK_1864', 'Raphael', 'Kamhi', 1864, 'Monastir, Turkey', 'No', ''),
+('RMA_1888', 'Regina', 'Aroesti', 1888, 'Monastir, Turkey', 'No', ''),
+('LRK_1892', 'Levi', 'Kamhi', 1892, 'Monastir, Turkey', 'No', ''),
+('MRK_1906', 'Max', 'Kamhi', 1906, 'Monastir, Turkey', 'No', ''),
+('JRK_1908', 'Julius', 'Kamhi', 1908, 'Monastir, Turkey', 'No', ''),
+('SRK_1911', 'Solomon', 'Kamhi', 1911, 'New York City, USA', 'No', ''),
+('IRK_1913', 'Irving', 'Kamhi', 1913, 'New York City, USA', 'No', ''),
+('BRK_1914', 'Betty', 'Kamhi', 1914, 'New York City, USA', 'No', ''),
+('JRK_1916', 'Joseph', 'Kamhi', 1916, 'New York City, USA', 'No', ''),
+('LRK_1917', 'Lena', 'Kamhi', 1917, 'New York City, USA', 'No', ''),
+('SRK_1919', 'Stella', 'Kamhi', 1919, 'New York City, USA', 'No', ''),
+('MTL_1865', 'Meyer', 'Levy', 1865, 'Monastir, Turkey', 'No', ''),
+('SNN_1861', 'Sadie', 'Nahmias', 1861, 'Monastir, Turkey', 'No', ''),
+('AML_1893', 'Albert', 'Levy', 1893, 'Monastir, Turkey', 'No', ''),
+('PML_1900', 'Pincus', 'Levy', 1900, 'Monastir, Turkey', 'No', ''),
+('SML_1900', 'Solomon', 'Levy', 1900, 'Monastir, Turkey', 'No', '');
+
+INSERT INTO livedIN (personID, addressID, familyID, relationToHead, year, occupation, recordLink, notes) Values
+('RAK_1864', 3, 'RafKam1864', 'Head', 1920, 'Tinsmith', '', ''),
+('RMA_1888', 3, 'RafKam1864', 'Wife', 1920, 'Housewife', '', ''),
+('LRK_1892', 3, 'RafKam1864', 'Son', 1920, 'Operator', '', ''),
+('MRK_1906', 3, 'RafKam1864', 'Son', 1920, '', '', ''),
+('JRK_1908', 3, 'RafKam1864', 'Son', 1920, '', '', ''),
+('SRK_1911', 3, 'RafKam1864', 'Son', 1920, '', '', ''),
+('IRK_1913', 3, 'RafKam1864', 'Son', 1920, '', '', ''),
+('BRK_1914', 3, 'RafKam1864', 'Daughter', 1920, '', '', ''),
+('JRK_1916', 3, 'RafKam1864', 'Son', 1920, '', '', ''),
+('LRK_1917', 3, 'RafKam1864', 'Daughter', 1920, '', '', ''),
+('SRK_1919', 3, 'RafKam1864', 'Daughter', 1920, '', '', ''),
+('MTL_1865', 1, 'MeyLev1865', 'Head', 1920, 'Retired', '', ''),
+('SNN_1861', 1, 'MeyLev1865', 'Wife', 1920, 'Housewife', '', ''),
+('AML_1893', 1, 'MeyLev1865', 'Son', 1920, 'Proprietor', '', ''),
+('PML_1900', 1, 'MeyLev1865', 'Son', 1920, 'Operator', '', ''),
+('SML_1900', 1, 'MeyLev1865', 'Son', 1920, 'Presser', '', '');

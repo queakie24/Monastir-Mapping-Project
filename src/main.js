@@ -36,3 +36,13 @@ async function initDatabase() {
 }
 
 initDatabase();
+
+//Add drop down functionality to reload and change map, and repopulate data points
+//Change how the drop down looks and the whole title bar at the top
+//Add another drop down for the year, and add code to have that drop down change values depending on city chosen
+//Can make the above just a const array with set values for each city
+//Add some data points in other cities to test
+//After all that, add a button event that opens a side panel, can add info inside said panel later.
+//Maybe make it so it's a panel in the background that becomes visible when the button is clicked, and can be closed with an X button in the corner of the panel.
+//And after that make it so each data point button has different info on the panel
+//AND make it so each data point says how many families are living at that address
