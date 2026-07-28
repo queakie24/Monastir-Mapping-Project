@@ -75,3 +75,8 @@ INSERT INTO livedIN (personID, addressID, familyID, relationToHead, year, occupa
 ('AML_1893', 1, 'MeyLev1865', 'Son', 1920, 'Proprietor', '', ''),
 ('PML_1900', 1, 'MeyLev1865', 'Son', 1920, 'Operator', '', ''),
 ('SML_1900', 1, 'MeyLev1865', 'Son', 1920, 'Presser', '', '');
+
+INSERT INTO addresses (addressName, latitude, longitude, city) VALUES
+('3 Square de Clignancourt', 48.89265272626683, 2.3458755071311406, 'Paris, France'),
+('33 Rue Alexandre Dumas', 48.85354425342937, 2.3920516571104673, 'Paris, France');
+

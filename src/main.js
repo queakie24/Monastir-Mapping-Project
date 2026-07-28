@@ -2,6 +2,9 @@
 let currentCity = 'New York City';
 let currentYear = 1920;
 
+//Collection of markers that changes for each city
+let currentCityMarkers = L.layerGroup();
+
 //Create the map on Manhattan
 const map = L.map('map').setView([40.715, -73.985], 15);
 
@@ -21,25 +24,38 @@ async function initDatabase() {
   //Fetch SQLite file
   const response = await fetch('./database/testdb.sqlite');
   const buffer = await response.arrayBuffer();
-  const db = new SQL.Database(new Uint8Array(buffer));
+
+  return new SQL.Database(new Uint8Array(buffer));
+}
+
+function loadCityMarkers(db, cityName){
+
+  currentCityMarkers.clearLayers(); //Clear existing markers
 
   //Retrieve address points from the database (test for retrieving all, and only from one city)
-  const stmt = db.prepare("SELECT addressID, addressName, latitude, longitude, city FROM addresses WHERE city = 'New York City'");
+  const stmt = db.prepare("SELECT addressID, addressName, latitude, longitude, city FROM addresses WHERE city = $city");
+  stmt.bind({$city: cityName});
 
   while (stmt.step()) {
     const row = stmt.getAsObject();
     
     if (row.latitude && row.longitude) {
-      L.marker([row.latitude, row.longitude])
-        .bindPopup(`<b>${row.addressName}</b><br>${row.city}`)
-        .addTo(map);
+      const marker = L.marker([row.latitude, row.longitude]).bindPopup(`<b>${row.addressName}</b><br>${row.city}`);
+      currentCityMarkers.addLayer(marker);
     }
   }
+
+  currentCityMarkers.addTo(map); // Add the markers to the map
   
   stmt.free(); // Clean up memory
 }
 
-initDatabase();
+async function startMap(){
+  const db = await initDatabase();
+  loadCityMarkers(db, currentCity); // Load markers for the initial city
+}
+
+startMap();
 
 //Add drop down functionality to reload and change map, and repopulate data points
 //Change how the drop down looks and the whole title bar at the top
