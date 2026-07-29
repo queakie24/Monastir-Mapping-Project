@@ -1,1 +1,0 @@
-SELECT COUNT(DISTINCT familyID) FROM livedIn WHERE addressID = 3;

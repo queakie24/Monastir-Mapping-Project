@@ -27,11 +27,23 @@ async function initDatabase() {
   return new SQL.Database(new Uint8Array(buffer));
 }
 
-function loadCityMarkers(db, cityName){
-  currentCityMarkers.clearLayers(); 
+function loadCityMarkers(db, cityName, selectedYear){
+  currentCityMarkers.clearLayers();
 
-  const stmt = db.prepare("SELECT addressID, addressName, latitude, longitude, city FROM addresses WHERE city = $city");
-  stmt.bind({$city: cityName});
+  const sql = `
+    SELECT DISTINCT 
+      a.addressID, 
+      a.addressName, 
+      a.latitude, 
+      a.longitude, 
+      a.city 
+    FROM addresses a
+    JOIN livedIn l ON a.addressID = l.addressID
+    WHERE a.city = $city AND l.year = $year
+  `;
+
+  const stmt = db.prepare(sql);
+  stmt.bind({$city: cityName, $year: Number(selectedYear)});
 
   while (stmt.step()) {
     const row = stmt.getAsObject();
@@ -79,13 +91,29 @@ function updateYearDropdown(cityName) {
   }
 }
 
-async function startMap(){
+// Triggered when year dropdown changes
+function onYearChange(event) {
+  currentYear = Number(event.target.value);
+  loadCityMarkers(db, currentCity, currentYear); //Reload markers for the new year
+}
+
+async function startMap() {
   db = await initDatabase();
-  updateYearDropdown(currentCity);
-  loadCityMarkers(db, currentCity); 
   
+  updateYearDropdown(currentCity);
+  loadCityMarkers(db, currentCity, currentYear); 
+
+  // City change listener
   const citySelect = document.getElementById('citySelect');
-  citySelect.addEventListener('change', onCityChange);
+  if (citySelect) {
+    citySelect.addEventListener('change', onCityChange);
+  }
+
+  // Year change listener
+  const yearSelect = document.getElementById('yearSelect');
+  if (yearSelect) {
+    yearSelect.addEventListener('change', onYearChange);
+  }
 }
 
 function changeCityCenter(cityName){
@@ -111,17 +139,13 @@ function changeCityCenter(cityName){
 function onCityChange(event){
   currentCity = event.target.value;
   changeCityCenter(currentCity);
-  updateYearDropdown(currentCity); // <--- Updates year options for selected city
-  loadCityMarkers(db, currentCity);  // <--- Reloads markers for selected city
+  updateYearDropdown(currentCity);
+  loadCityMarkers(db, currentCity, currentYear);
 }
 
 startMap();
 
-//Add drop down functionality to reload and change map, and repopulate data points
 //Change how the drop down looks and the whole title bar at the top
-//Add another drop down for the year, and add code to have that drop down change values depending on city chosen
-//Can make the above just a const array with set values for each city
-//Add some data points in other cities to test
 //After all that, add a button event that opens a side panel, can add info inside said panel later.
 //Maybe make it so it's a panel in the background that becomes visible when the button is clicked, and can be closed with an X button in the corner of the panel.
 //And after that make it so each data point button has different info on the panel
