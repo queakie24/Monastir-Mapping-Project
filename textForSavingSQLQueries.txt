@@ -80,3 +80,40 @@ INSERT INTO addresses (addressName, latitude, longitude, city) VALUES
 ('3 Square de Clignancourt', 48.89265272626683, 2.3458755071311406, 'Paris, France'),
 ('33 Rue Alexandre Dumas', 48.85354425342937, 2.3920516571104673, 'Paris, France');
 
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, photo, notes) VALUES
+('DMA_1884', 'Daniel', 'Aronesty', 1884, 'Monastir, Turkey', 'Yes', ''),
+('MYA_1882', 'Mollie', 'Albucar', 1882, 'Monastir, Turkey', 'No', ''),
+('SDA_1903', 'Sophie', 'Aronesty', 1903, 'Monastir, Turkey', 'Yes', ''),
+('SDA_1910', 'Sarah', 'Aronesty', 1910, 'Monastir, Turkey', 'No', ''),
+('DDA_1914', 'Dora', 'Aronesty', 1914, 'New York City, USA', 'No', ''),
+('MDA_1917', 'Morris', 'Aronesty', 1917, 'New York City, USA', 'Yes', ''),
+('MDA_1919', 'Michael', 'Aronesty', 1919, 'New York City, USA', 'No', ''),
+('SUnUn_1850', 'Sophie', 'Unknown', 1850, 'Monastir, Turkey', 'No', '');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('DMA_1884', 8, 'DanAro1884', 'Head', 1920, 'Presser'),
+('MYA_1882', 8, 'DanAro1884', 'Wife', 1920, 'Housewife'),
+('SDA_1903', 8, 'DanAro1884', 'Daughter', 1920, 'Operator'),
+('SDA_1910', 8, 'DanAro1884', 'Daughter', 1920, ''),
+('DDA_1914', 8, 'DanAro1884', 'Daughter', 1920, ''),
+('MDA_1917', 8, 'DanAro1884', 'Son', 1920, ''),
+('MDA_1919', 8, 'DanAro1884', 'Son', 1920, ''),
+('SUnUn_1850', 8, 'DanAro1884', 'Mother', 1920, '');
+
+SELECT DISTINCT a.addressID, a.addressName, a.latitude, a.longitude, a.city
+FROM addresses a
+JOIN livedIn l ON a.addressID = l.addressID
+WHERE a.city = 'New York City' AND l.year = 1920;
+
+SELECT l.addressID, COUNT(DISTINCT l.familyID) as familyCount
+FROM livedIn l
+JOIN addresses a ON l.addressID = a.addressID
+WHERE a.city = 'New York City' AND l.year = 1920
+GROUP BY a.addressID;
+
+SELECT DISTINCT a.addressID, a.addressName, a.latitude, a.longitude, a.city, COUNT(DISTINCT l.familyID) AS familyCount
+FROM addresses a
+JOIN livedIn l ON a.addressID = l.addressID
+WHERE a.city = 'New York City' AND l.year = 1920
+GROUP BY a.addressID, a.addressName, a.latitude, a.longitude, a.city;
+

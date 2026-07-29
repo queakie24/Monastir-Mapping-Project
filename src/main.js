@@ -1,6 +1,6 @@
 //Global Variables
 let currentCity = 'New York City';
-let currentYear = 1920;
+let currentYear = 1910;
 let db;
 
 //Collection of markers that changes for each city
@@ -36,10 +36,12 @@ function loadCityMarkers(db, cityName, selectedYear){
       a.addressName, 
       a.latitude, 
       a.longitude, 
-      a.city 
+      a.city,
+      COUNT (DISTINCT l.familyID) AS familyCount
     FROM addresses a
     JOIN livedIn l ON a.addressID = l.addressID
     WHERE a.city = $city AND l.year = $year
+    GROUP BY a.addressID, a.addressName, a.latitude, a.longitude, a.city
   `;
 
   const stmt = db.prepare(sql);
@@ -49,7 +51,7 @@ function loadCityMarkers(db, cityName, selectedYear){
     const row = stmt.getAsObject();
     
     if (row.latitude && row.longitude) {
-      const marker = L.marker([row.latitude, row.longitude]).bindPopup(`<b>${row.addressName}</b><br>${row.city}`);
+      const marker = L.marker([row.latitude, row.longitude]).bindPopup(`<b>${row.addressName}</b><br> Families: ${row.familyCount}`);
       currentCityMarkers.addLayer(marker);
     }
   }
@@ -149,4 +151,3 @@ startMap();
 //After all that, add a button event that opens a side panel, can add info inside said panel later.
 //Maybe make it so it's a panel in the background that becomes visible when the button is clicked, and can be closed with an X button in the corner of the panel.
 //And after that make it so each data point button has different info on the panel
-//AND make it so each data point says how many families are living at that address
