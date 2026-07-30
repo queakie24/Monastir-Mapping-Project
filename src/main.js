@@ -51,8 +51,10 @@ function loadCityMarkers(db, cityName, selectedYear){
     const row = stmt.getAsObject();
     
     if (row.latitude && row.longitude) {
+
       const marker = L.marker([row.latitude, row.longitude]).bindPopup(`<b>${row.addressName}</b><br> Families: ${row.familyCount}`);
       currentCityMarkers.addLayer(marker);
+      
     }
   }
 
