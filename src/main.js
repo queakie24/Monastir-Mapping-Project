@@ -99,25 +99,6 @@ function onYearChange(event) {
   loadCityMarkers(db, currentCity, currentYear); //Reload markers for the new year
 }
 
-async function startMap() {
-  db = await initDatabase();
-  
-  updateYearDropdown(currentCity);
-  loadCityMarkers(db, currentCity, currentYear); 
-
-  // City change listener
-  const citySelect = document.getElementById('citySelect');
-  if (citySelect) {
-    citySelect.addEventListener('change', onCityChange);
-  }
-
-  // Year change listener
-  const yearSelect = document.getElementById('yearSelect');
-  if (yearSelect) {
-    yearSelect.addEventListener('change', onYearChange);
-  }
-}
-
 function changeCityCenter(cityName){
   switch(cityName) {
     case 'New York City':
@@ -130,7 +111,7 @@ function changeCityCenter(cityName){
       map.setView([43.1566, -77.6088], 15);
       break;
     case 'Paris':
-      map.setView([48.8566, 2.3522], 15);
+      map.setView([48.853405746511335, 2.348792594089559], 15);
       break;
     case 'Bitola':
       map.setView([41.03097605340596, 21.333955937806056], 15);
@@ -143,6 +124,29 @@ function onCityChange(event){
   changeCityCenter(currentCity);
   updateYearDropdown(currentCity);
   loadCityMarkers(db, currentCity, currentYear);
+}
+
+async function startMap() {
+  db = await initDatabase();
+  
+  updateYearDropdown(currentCity);
+  loadCityMarkers(db, currentCity, currentYear); 
+
+  //Event listener for city change
+  const citySelect = document.getElementById('citySelect');
+  if (citySelect) {
+    citySelect.addEventListener('change', onCityChange);
+  }
+
+  //Event listener for year change
+  const yearSelect = document.getElementById('yearSelect');
+  if (yearSelect) {
+    yearSelect.addEventListener('change', onYearChange);
+  }
+
+  //Make a side panel that slides in when a button is clicked
+  //Add event listener for said button for the side panel
+  //Make it first load list of families before opening the panel
 }
 
 startMap();
