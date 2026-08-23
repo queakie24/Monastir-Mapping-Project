@@ -11,7 +11,7 @@ body {
 }
 
 #title {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -26,6 +26,17 @@ body {
     font-weight: bold;
     color: black;
     border-radius: 0;
+}
+
+#project-title {
+    position: absolute;
+    left:50%;
+    text-align: center;
+    transform: translateX(-50%);
+    margin: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    font-size: 24px;
 }
 
 #citySelect {

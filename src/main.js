@@ -42,11 +42,18 @@ function showAddressDetails(db, addressID, addressName) {
   const panel = document.getElementById('sidepanel');
   const content = document.getElementById('sidepanelcontent');
 
-  // Query families at this specific address for the current year
+  // JOIN livedIn with people table to get the Head of Household
   const sql = `
-    SELECT DISTINCT l.familyID, l.notes -- adjust column names to match your schema
+    SELECT 
+      l.familyID, 
+      l.notes,
+      p.firstName,
+      p.lastName
     FROM livedIn l
-    WHERE l.addressID = $addressID AND l.year = $year
+    JOIN person p ON l.personID = p.personID
+    WHERE l.addressID = $addressID 
+      AND l.year = $year 
+      AND l.relationToHead = 'Head'
   `;
 
   const stmt = db.prepare(sql);
@@ -58,16 +65,21 @@ function showAddressDetails(db, addressID, addressName) {
   while (stmt.step()) {
     const family = stmt.getAsObject();
     count++;
+    
+    // Construct head of family name, fallback to Family ID if name missing
+    const headName = (family.firstName || family.lastName) 
+      ? `${family.firstName || ''} ${family.lastName || ''}`.trim() 
+      : `Family #${family.familyID}`;
+
     familiesHTML += `
       <div class="family-card">
-        <h4>Family #${family.familyID}</h4>
+        <h4>Family of: ${headName}</h4>
         <p>${family.notes ? family.notes : 'No extra notes available.'}</p>
       </div>
     `;
   }
   stmt.free();
 
-  // Populate HTML inside side panel
   content.innerHTML = `
     <h2>${addressName}</h2>
     <p><strong>Year:</strong> ${currentYear}</p>
@@ -77,7 +89,6 @@ function showAddressDetails(db, addressID, addressName) {
     ${count > 0 ? familiesHTML : '<p>No family records found.</p>'}
   `;
 
-  // Slide panel in
   panel.classList.add('open');
 }
 
@@ -187,6 +198,8 @@ async function startMap() {
 startMap();
 
 //Change how the drop down looks and the whole title bar at the top
-//After all that, add a button event that opens a side panel, can add info inside said panel later.
-//Maybe make it so it's a panel in the background that becomes visible when the button is clicked, and can be closed with an X button in the corner of the panel.
 //And after that make it so each data point button has different info on the panel
+
+//Read through the side panel and button code so I understand it myself, and know how to make it customizable
+//Make it so each family in the side panel is a drop down that had info about each family member
+//Start making things look pretty
