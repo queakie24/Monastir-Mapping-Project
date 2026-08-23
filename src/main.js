@@ -1,21 +1,32 @@
-//Global Variables
+// Global State
 let currentCity = 'New York City';
 let currentYear = 1910;
 let db;
 
-//Collection of markers that changes for each city
-let currentCityMarkers = L.layerGroup();
+// City configuration registry
+const CITY_CONFIG = {
+  'New York City': { center: [40.715, -73.985], zoom: 15, years: [1910, 1920, 1930, 1940] },
+  'Rochester':     { center: [43.1566, -77.6088], zoom: 15, years: [1910, 1920, 1930, 1940] },
+  'Indianapolis':  { center: [39.7682, -86.1581], zoom: 15, years: [1910, 1920, 1930, 1940] },
+  'Paris':         { center: [48.8534, 2.3488], zoom: 15, years: [1926, 1931, 1936] },
+  'Bitola':        { center: [41.0310, 21.3340], zoom: 15, years: [1943] }
+};
 
-//Create the map on Manhattan
-const map = L.map('map').setView([40.715, -73.985], 16);
+// Layer group for dynamic markers
+const currentCityMarkers = L.layerGroup();
 
-//Add the OpenStreetMap tile layer
+// Initialize Map
+const initialConfig = CITY_CONFIG[currentCity];
+const map = L.map('map').setView(initialConfig.center, initialConfig.zoom);
+
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; OpenStreetMap contributors'
+  maxZoom: 19,
+  attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-//Load SQL.js & SQLite database
+currentCityMarkers.addTo(map);
+
+// SQL Setup
 async function initDatabase() {
   const SQL = await initSqlJs({
     locateFile: file => `./lib/${file}`
@@ -27,17 +38,74 @@ async function initDatabase() {
   return new SQL.Database(new Uint8Array(buffer));
 }
 
-function loadCityMarkers(db, cityName, selectedYear){
+function showAddressDetails(db, addressID, addressName) {
+  const panel = document.getElementById('sidepanel');
+  const content = document.getElementById('sidepanelcontent');
+
+  // Query families at this specific address for the current year
+  const sql = `
+    SELECT DISTINCT l.familyID, l.notes -- adjust column names to match your schema
+    FROM livedIn l
+    WHERE l.addressID = $addressID AND l.year = $year
+  `;
+
+  const stmt = db.prepare(sql);
+  stmt.bind({ $addressID: addressID, $year: currentYear });
+
+  let familiesHTML = '';
+  let count = 0;
+
+  while (stmt.step()) {
+    const family = stmt.getAsObject();
+    count++;
+    familiesHTML += `
+      <div class="family-card">
+        <h4>Family #${family.familyID}</h4>
+        <p>${family.notes ? family.notes : 'No extra notes available.'}</p>
+      </div>
+    `;
+  }
+  stmt.free();
+
+  // Populate HTML inside side panel
+  content.innerHTML = `
+    <h2>${addressName}</h2>
+    <p><strong>Year:</strong> ${currentYear}</p>
+    <p><strong>Total Families:</strong> ${count}</p>
+    <hr>
+    <h3>Families</h3>
+    ${count > 0 ? familiesHTML : '<p>No family records found.</p>'}
+  `;
+
+  // Slide panel in
+  panel.classList.add('open');
+}
+
+function closeSidePanel() {
+  const sidePanel = document.getElementById('sidepanel');
+  if (sidePanel) {
+    sidePanel.classList.remove('open');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const closeBtn = document.getElementById('closepanel');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeSidePanel);
+  }
+});
+
+function loadCityMarkers(db, cityName, selectedYear) {
   currentCityMarkers.clearLayers();
 
   const sql = `
-    SELECT DISTINCT 
+    SELECT 
       a.addressID, 
       a.addressName, 
       a.latitude, 
       a.longitude, 
       a.city,
-      COUNT (DISTINCT l.familyID) AS familyCount
+      COUNT(DISTINCT l.familyID) AS familyCount
     FROM addresses a
     JOIN livedIn l ON a.addressID = l.addressID
     WHERE a.city = $city AND l.year = $year
@@ -45,87 +113,58 @@ function loadCityMarkers(db, cityName, selectedYear){
   `;
 
   const stmt = db.prepare(sql);
-  stmt.bind({$city: cityName, $year: Number(selectedYear)});
+  stmt.bind({ $city: cityName, $year: Number(selectedYear) });
 
   while (stmt.step()) {
     const row = stmt.getAsObject();
     
     if (row.latitude && row.longitude) {
-
       const marker = L.marker([row.latitude, row.longitude]).bindPopup(`<b>${row.addressName}</b><br> Families: ${row.familyCount}`);
-      currentCityMarkers.addLayer(marker);
+
+      marker.on('click', () => {showAddressDetails(db, row.addressID, row.addressName);})
       
+      currentCityMarkers.addLayer(marker);
     }
   }
 
-  currentCityMarkers.addTo(map); 
   stmt.free(); 
 }
 
 function updateYearDropdown(cityName) {
   const yearDropdown = document.getElementById('yearSelect');
-  yearDropdown.innerHTML = ''; // Clears existing year options
+  if (!yearDropdown) return;
+  
+  yearDropdown.innerHTML = ''; 
 
-  if (cityName === 'New York City' || cityName === 'Rochester' || cityName === 'Indianapolis') {
-    const years = [1910, 1920, 1930, 1940];
-    years.forEach(year => {
-      const option = document.createElement('option');
-      option.value = year;
-      option.textContent = year;
-      yearDropdown.appendChild(option);
-    });
-  }
-  else if (cityName === 'Paris') {
-    const years = [1926, 1931, 1936];
-    years.forEach(year => {
-      const option = document.createElement('option');
-      option.value = year;
-      option.textContent = year;
-      yearDropdown.appendChild(option);
-    });
-  }
-  else if (cityName === 'Bitola') {
-    const years = [1943];
-    years.forEach(year => {
-      const option = document.createElement('option');
-      option.value = year;
-      option.textContent = year;
-      yearDropdown.appendChild(option);
-    });
-  }
+  const config = CITY_CONFIG[cityName];
+  if (!config) return;
+
+  config.years.forEach(year => {
+    const option = document.createElement('option');
+    option.value = year;
+    option.textContent = year;
+    yearDropdown.appendChild(option);
+  });
+
+  // Ensure currentYear updates to the active city's first available year
+  currentYear = config.years[0];
+  yearDropdown.value = currentYear;
 }
 
-// Triggered when year dropdown changes
 function onYearChange(event) {
   currentYear = Number(event.target.value);
-  loadCityMarkers(db, currentCity, currentYear); //Reload markers for the new year
-}
-
-function changeCityCenter(cityName){
-  switch(cityName) {
-    case 'New York City':
-      map.setView([40.715, -73.985], 15);
-      break;
-    case 'Indianapolis':
-      map.setView([39.7682, -86.1581], 15);                                             //Change coordinates for these cities later
-      break;                                                                            //When more of the population is added to the database
-    case 'Rochester':
-      map.setView([43.1566, -77.6088], 15);
-      break;
-    case 'Paris':
-      map.setView([48.853405746511335, 2.348792594089559], 15);
-      break;
-    case 'Bitola':
-      map.setView([41.03097605340596, 21.333955937806056], 15);
-      break;
-  }
-}
-
-function onCityChange(event){
-  currentCity = event.target.value;
-  changeCityCenter(currentCity);
-  updateYearDropdown(currentCity);
   loadCityMarkers(db, currentCity, currentYear);
+}
+
+function onCityChange(event) {
+  currentCity = event.target.value;
+  const config = CITY_CONFIG[currentCity];
+
+  if (config) {
+    map.setView(config.center, config.zoom);
+    updateYearDropdown(currentCity); // Also resets currentYear internally
+    loadCityMarkers(db, currentCity, currentYear);
+  }
 }
 
 async function startMap() {
@@ -134,21 +173,15 @@ async function startMap() {
   updateYearDropdown(currentCity);
   loadCityMarkers(db, currentCity, currentYear); 
 
-  //Event listener for city change
   const citySelect = document.getElementById('citySelect');
   if (citySelect) {
     citySelect.addEventListener('change', onCityChange);
   }
 
-  //Event listener for year change
   const yearSelect = document.getElementById('yearSelect');
   if (yearSelect) {
     yearSelect.addEventListener('change', onYearChange);
   }
-
-  //Make a side panel that slides in when a button is clicked
-  //Add event listener for said button for the side panel
-  //Make it first load list of families before opening the panel
 }
 
 startMap();

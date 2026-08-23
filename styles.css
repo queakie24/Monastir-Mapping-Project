@@ -39,9 +39,44 @@ body {
 }
 
 #sidepanel {
-    position: relative;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 380px;
     height: 100vh;
-    z-index: 998;
-    background-color: white;
-    left: calc(100% - 500px);
+    box-sizing: border-box;
+    background-color: #ffffff;
+    z-index: 1001;
+    padding: 70px 20px 20px 20px;
+    box-shadow: -3px 0 10px rgba(0,0,0,0.2);
+
+
+    /*Allows for sliding animation*/
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    overflow-y: auto;
+}
+
+#sidepanel.open {
+  transform: translateX(0);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #555;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.family-card {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
 }
