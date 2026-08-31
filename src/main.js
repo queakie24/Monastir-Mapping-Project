@@ -197,6 +197,12 @@ async function startMap() {
 
 startMap();
 
+//PROBLEMS WITH DATABASE/CODE
+// - Added spouseID and marriageYear to correctly display married/maiden name in sidepanel
+// - How to fix when someone is married more than once within census years???
+// - Can have list of spouseIDs within one column and use a delimiter to separate, but may be inefficient
+// - Can do the same with marriage years, for-loop to iterate through and match in-order years to spouses
+
 //Change how the drop down looks and the whole title bar at the top
 //And after that make it so each data point button has different info on the panel
 
