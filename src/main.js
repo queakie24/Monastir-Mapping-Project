@@ -197,6 +197,11 @@ async function startMap() {
 
 startMap();
 
+//WORK ON TOMORROW!!!
+//In showAddressDetails method, convert HTML created in there to an Accordion/Drop-Down menu
+//Have it collect info from SQL DB for every member of familyID before moving on to next family
+//See what difference is between how it adds HeadOfHousehold vs. innerHTML line with Address and NumOfFamilies
+
 //PROBLEMS WITH DATABASE/CODE
 // - Added spouseID and marriageYear to correctly display married/maiden name in sidepanel
 // - How to fix when someone is married more than once within census years???
