@@ -42,44 +42,84 @@ function showAddressDetails(db, addressID, addressName) {
   const panel = document.getElementById('sidepanel');
   const content = document.getElementById('sidepanelcontent');
 
-  // JOIN livedIn with people table to get the Head of Household
-  const sql = `
-    SELECT 
-      l.familyID, 
+  // Query ALL people at this address for the current year
+  const sqlAll = `
+    SELECT
+      l.familyID,
       l.notes,
+      l.relationToHead,
+      p.personID,
       p.firstName,
       p.lastName
     FROM livedIn l
     JOIN person p ON l.personID = p.personID
-    WHERE l.addressID = $addressID 
-      AND l.year = $year 
-      AND l.relationToHead = 'Head'
+    WHERE l.addressID = $addressID
+      AND l.year = $year
   `;
 
-  const stmt = db.prepare(sql);
-  stmt.bind({ $addressID: addressID, $year: currentYear });
+  const stmtAll = db.prepare(sqlAll);
+  stmtAll.bind({ $addressID: addressID, $year: currentYear });
 
-  let familiesHTML = '';
-  let count = 0;
+  // 1. Group individuals by familyID
+  const familiesMap = {};
 
-  while (stmt.step()) {
-    const family = stmt.getAsObject();
-    count++;
-    
-    // Construct head of family name, fallback to Family ID if name missing
-    const headName = (family.firstName || family.lastName) 
-      ? `${family.firstName || ''} ${family.lastName || ''}`.trim() 
-      : `Family #${family.familyID}`;
+  while (stmtAll.step()) {
+    const person = stmtAll.getAsObject();
+    const familyID = person.familyID;
 
-    familiesHTML += `
-      <div class="family-card">
-        <h4>Family of: ${headName}</h4>
-        <p>${family.notes ? family.notes : 'No extra notes available.'}</p>
-      </div>
-    `;
+    if (!familiesMap[familyID]) {
+      familiesMap[familyID] = {
+        headName: '',
+        headNotes: '',
+        members: []
+      };
+    }
+
+    // Check if this person is the head of household
+    if (person.relationToHead === 'Head') {
+      const name = `${person.firstName || ''} ${person.lastName || ''}`.trim();
+      familiesMap[familyID].headName = name || `Family #${familyID}`;
+      familiesMap[familyID].headNotes = person.notes || '';
+    }
+
+    familiesMap[familyID].members.push(person);
   }
-  stmt.free();
+  stmtAll.free();
 
+  const familyIDs = Object.keys(familiesMap);
+  const count = familyIDs.length;
+
+  // 2. Generate HTML markup using <details> for native accordions
+  const familiesHTML = familyIDs.map(famID => {
+    const family = familiesMap[famID];
+    const headName = family.headName || `Family #${famID}`;
+
+    const membersHTML = family.members.map(member => {
+      const memberName = `${member.firstName || ''} ${member.lastName || ''}`.trim() || `Individual #${member.personID}`;
+      const relation = member.relationToHead ? ` (${member.relationToHead})` : '';
+
+      return `
+        <div class="individual-card">
+          <p>${memberName}${relation}</p>
+          <p>${member.notes ? member.notes : 'No extra notes available.'}</p>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <details class="family-accordion" name="family-group">
+        <summary class="family-header">
+          <strong>Family of: ${headName}</strong>
+        </summary>
+        <div class="person-details">
+          ${family.headNotes ? `<p class="family-notes"><em>${family.headNotes}</em></p>` : ''}
+          ${membersHTML}
+        </div>
+      </details>
+    `;
+  }).join('');
+
+  // 3. Render sidepanel
   content.innerHTML = `
     <h2>${addressName}</h2>
     <p><strong>Year:</strong> ${currentYear}</p>

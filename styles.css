@@ -87,7 +87,47 @@ body {
   color: #000;
 }
 
-.family-card { /*Currently changing this one*/
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
+/* Container details styling */
+.family-accordion {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+/* Clickable summary header */
+.family-header {
+  padding: 10px 14px;
+  background-color: #f4f4f4;
+  cursor: pointer;
+  user-select: none;
+}
+
+.family-header:hover {
+  background-color: #e8e8e8;
+}
+
+/* Inner content */
+.person-details {
+  padding: 10px 14px;
+  background-color: #ffffff;
+}
+
+.individual-card {
+  border-top: 1px dashed #eee;
+  padding: 6px 0;
+}
+
+.individual-card:first-child {
+  border-top: none;
+}
+
+.individual-card h5 {
+  margin: 0 0 4px 0;
+}
+
+.individual-card p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
 }
