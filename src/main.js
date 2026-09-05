@@ -237,10 +237,12 @@ async function startMap() {
 
 startMap();
 
-//WORK ON TOMORROW!!!
-//In showAddressDetails method, convert HTML created in there to an Accordion/Drop-Down menu
-//Have it collect info from SQL DB for every member of familyID before moving on to next family
-//See what difference is between how it adds HeadOfHousehold vs. innerHTML line with Address and NumOfFamilies
+//THINGS FOR NEXT TIME
+// - Make dropdowns look better within side panel
+// - Make sure text is not too small and is easily readable
+// - Start adding more families to the database
+// -- Including different years / cities
+// - See how adding photos works and how it displays in the dropdown
 
 //PROBLEMS WITH DATABASE/CODE
 // - Added spouseID and marriageYear to correctly display married/maiden name in sidepanel
@@ -252,5 +254,4 @@ startMap();
 //And after that make it so each data point button has different info on the panel
 
 //Read through the side panel and button code so I understand it myself, and know how to make it customizable
-//Make it so each family in the side panel is a drop down that had info about each family member
 //Start making things look pretty
