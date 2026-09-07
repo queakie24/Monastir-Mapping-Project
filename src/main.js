@@ -134,6 +134,7 @@ function showAddressDetails(db, addressID, addressName) {
     <h3>Families</h3>
     ${count > 0 ? familiesHTML : '<p>No family records found.</p>'}
   `;
+  //Eventually add notes section for the sidepanel underneath the count of families
 
   panel.classList.add('open');
 }

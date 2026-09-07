@@ -117,3 +117,21 @@ JOIN livedIn l ON a.addressID = l.addressID
 WHERE a.city = 'New York City' AND l.year = 1920
 GROUP BY a.addressID, a.addressName, a.latitude, a.longitude, a.city;
 
+UPDATE addresses SET notes = '101 Allen Street in the Lower East Side of Manhattan was a large hub for immigrating Sephardic Jews from the Balkans. Many Jewish families from Monastir, Salonica, and Castoria (Bitola, Thessaloniki, and Kastoria respectively) lived here or met family and friends here when coming to the US. One man in this community, Joseph Cohen, was very well known. Joseph Cohen was a Jew from Castoria, Greece who lived at 101 Allen St. with his family. He owned a barber shop on the first floor. In the 1900s-1920s, Joseph Cohen would help immigrating Jews from Greece and Macedonia, helping them find their family, find work or places to stay, and even hired some people in his barber shop in the mean time. He was so well known, that back in the old country, some Jews would say they were going to meet him when they were immigrating, even if they never met him before.' WHERE addressID = 1;
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('MMC_1894', 'Mair', 'Calderon', 1894, 'Monastir, Turkey', 'RML_1897', '1916', 'M'),
+('RML_1897', 'Rebecca', 'Levy', 1897, 'Monastir, Turkey', 'MMC_1894', '1916', 'F'),
+('IMC_1917', 'Isaac', 'Calderon', 1917, 'Monastir, Turkey', NULL, NULL, 'M'),
+('MMC_1918', 'Morris', 'Calderon', 1918, 'Monastir, Turkey', NULL, NULL, 'M'),
+('LMC_1919', 'Lillian', 'Calderon', 1919, 'Monastir, Turkey', NULL, NULL, 'F'),
+('ABB_1898', 'Abraham', 'Baruch', 1898, 'Monastir, Turkey', NULL, NULL, 'M');
+
+INSERT INTO livedIn (addressID, personID, familyID, relationToHead, year, occupation) VALUES
+(1, 'MMC_1894', 'MaiCal1894', 'Head', 1920, 'Proprietor of Skirts'),
+(1, 'RML_1897', 'MaiCal1894', 'Wife', 1920, NULL),
+(1, 'IMC_1917', 'MaiCal1894', 'Son', 1920, NULL),
+(1, 'MMC_1918', 'MaiCal1894', 'Son', 1920, NULL),
+(1, 'LMC_1919', 'MaiCal1894', 'Daughter', 1920, NULL),
+(1, 'ABB_1898', 'MaiCal1894', 'Boarder', 1920, 'Tinsmith');
+
