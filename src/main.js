@@ -50,7 +50,10 @@ function showAddressDetails(db, addressID, addressName) {
       l.relationToHead,
       p.personID,
       p.firstName,
-      p.lastName
+      p.lastName,
+      p.birthYear,
+      p.birthPlace,
+      p.notes
     FROM livedIn l
     JOIN person p ON l.personID = p.personID
     WHERE l.addressID = $addressID
@@ -97,10 +100,13 @@ function showAddressDetails(db, addressID, addressName) {
     const membersHTML = family.members.map(member => {
       const memberName = `${member.firstName || ''} ${member.lastName || ''}`.trim() || `Individual #${member.personID}`;
       const relation = member.relationToHead ? ` (${member.relationToHead})` : '';
+      const birthyear = member.birthYear ? `b. ${member.birthYear}` : '';
+      const birthplace = member.birthPlace ? `${member.birthPlace}` : '';
 
       return `
         <div class="individual-card">
           <p>${memberName}${relation}</p>
+          <p>${birthyear} in ${birthplace}</p>
           <p>${member.notes ? member.notes : 'No extra notes available.'}</p>
         </div>
       `;
