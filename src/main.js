@@ -251,6 +251,12 @@ startMap();
 // -- Including different years / cities
 // - See how adding photos works and how it displays in the dropdown
 
+//ANOTHER PROBLEM WITH DATABASE
+// - Sidepanel displays each family in the order they were inserted into the DB
+// - Possibility for Head of family to be at the end instead of at the top
+// - Order of rest does not matter, but Head and Spouse should be at the top
+// - Find a fix or insert in specific order every time
+
 //PROBLEMS WITH DATABASE/CODE
 // - Added spouseID and marriageYear to correctly display married/maiden name in sidepanel
 // - How to fix when someone is married more than once within census years???

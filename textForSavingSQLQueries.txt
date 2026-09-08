@@ -135,3 +135,18 @@ INSERT INTO livedIn (addressID, personID, familyID, relationToHead, year, occupa
 (1, 'LMC_1919', 'MaiCal1894', 'Daughter', 1920, NULL),
 (1, 'ABB_1898', 'MaiCal1894', 'Boarder', 1920, 'Tinsmith');
 
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, sex) VALUES
+('BAC_1882', 'Bohor', 'Cassorla', 1882, 'Monastir, Turkey', 'M'),
+('MAC_1894', 'Morris', 'Cassorla', 1894, 'Monastir, Turkey', 'M'),
+('DAC_1906', 'David', 'Cassorla', 1906, 'Monastir, Turkey', 'M'),
+('EAC_1897', 'Eleanora', 'Cassorla', 1897, 'Monastir, Turkey', 'F'),
+('RAC_1899', 'Regina', 'Cassorla', 1899, 'Monastir, Turkey', 'F'),
+('TIN_1864', 'Tova', 'Negrin', 1864, 'Monastir, Turkey', 'F');
+
+INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('BAC_1882', 1, 'TovKass1864', 'Son', 1920, 'Presser'),
+('MAC_1894', 1, 'TovKass1864', 'Son', 1920, 'Presser'),
+('DAC_1906', 1, 'TovKass1864', 'Son', 1920, NULL),
+('EAC_1897', 1, 'TovKass1864', 'Daughter', 1920, 'Operator'),
+('RAC_1899', 1, 'TovKass1864', 'Daughter', 1920, 'Operator'),
+('TIN_1864', 1, 'TovKass1864', 'Head', 1920, NULL);
