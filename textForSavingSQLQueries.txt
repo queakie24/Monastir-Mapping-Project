@@ -150,3 +150,14 @@ INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupat
 ('EAC_1897', 1, 'TovKass1864', 'Daughter', 1920, 'Operator'),
 ('RAC_1899', 1, 'TovKass1864', 'Daughter', 1920, 'Operator'),
 ('TIN_1864', 1, 'TovKass1864', 'Head', 1920, NULL);
+
+DELETE FROM livedIn WHERE familyID = 'TovKass1864';
+
+INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('TIN_1864', 1, 'TovKass1864', 'Head', 1920, NULL),
+('BAC_1882', 1, 'TovKass1864', 'Son', 1920, 'Presser'),
+('MAC_1894', 1, 'TovKass1864', 'Son', 1920, 'Presser'),
+('DAC_1906', 1, 'TovKass1864', 'Son', 1920, NULL),
+('EAC_1897', 1, 'TovKass1864', 'Daughter', 1920, 'Operator'),
+('RAC_1899', 1, 'TovKass1864', 'Daughter', 1920, 'Operator');
+
