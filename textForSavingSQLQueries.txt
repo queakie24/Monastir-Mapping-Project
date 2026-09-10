@@ -161,3 +161,51 @@ INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupat
 ('EAC_1897', 1, 'TovKass1864', 'Daughter', 1920, 'Operator'),
 ('RAC_1899', 1, 'TovKass1864', 'Daughter', 1920, 'Operator');
 
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, sex, spouseID, marriageYear) VALUES
+('BML_1887', 'Behor', 'Levy', 1887, 'Monastir, Turkey', 'M', 'LJR_1898', 1916),
+('LJR_1898', 'Lillie', 'Russo', 1898, 'Monastir, Turkey', 'F', 'BML_1887', 1916),
+('JBL_1918', 'Joseph', 'Levy', 1918, 'New York City, USA', 'M', NULL, NULL),
+('PBL_1919', 'Pauline', 'Levy', 1919, 'New York City, USA', 'F', NULL, NULL);
+
+INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('BML_1887', 1, 'BecLev1887', 'Head', 1920, 'Laborer'),
+('LJR_1898', 1, 'BecLev1887', 'Wife', 1920, NULL),
+('JBL_1918', 1, 'BecLev1887', 'Son', 1920, NULL),
+('PBL_1919', 1, 'BecLev1887', 'Daughter', 1920, NULL);
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, sex, spouseID, marriageYear) VALUES
+('DBL_1876', 'Daniel', 'Levy', 1876, 'Monastir, Turkey', 'M', 'JUnP_1885', 1910),
+('JUnP_1885', 'Julia', 'Perez', 1885, 'Monastir, Turkey', 'F', 'DBL_1876', 1910),
+('ADL_1918', 'Albert', 'Levy', 1912, 'Salonica, Greece', 'M', NULL, NULL),
+('JDL_1913', 'John', 'Levy', 1913, 'Monastir, Turkey', 'M', NULL, NULL),
+('RBL_1902', 'Rebecca', 'Levy', 1902, 'Monastir, Turkey', 'F', NULL, NULL);
+
+INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupation, notes) VALUES
+('DBL_1876', 1, 'DanLev1876', 'Head', 1920, 'Helper', NULL),
+('JUnP_1885', 1, 'DanLev1876', 'Wife', 1920, NULL, NULL),
+('ADL_1918', 1, 'DanLev1876', 'Son', 1920, NULL, NULL),
+('JDL_1913', 1, 'DanLev1876', 'Son', 1920, NULL, NULL),
+('RBL_1902', 1, 'DanLev1876', 'Boarder', 1920, 'Operator', 'Sister of Daniel Levy');
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, sex, spouseID, marriageYear) VALUES
+('MHH_1895', 'Morris', 'Hazan', 1895, 'Istanbul, Turkey', 'M', 'RDM_1900', 1918),
+('RDM_1900', 'Rebecca', 'Mussey', 1900, 'Monastir, Turkey', 'F', 'MHH_1895', 1918),
+('HMH_1918', 'Hyman', 'Hazan', 1918, 'New York City, USA', 'M', NULL, NULL);
+
+INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupation, notes) VALUES
+('MHH_1895', 1, 'MorHaz1895', 'Head', 1920, 'Pen Maker', NULL),
+('RDM_1900', 1, 'MorHaz1895', 'Wife', 1920, NULL, NULL),
+('HMH_1918', 1, 'MorHaz1895', 'Son', 1920, NULL, NULL);
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, sex, spouseID, marriageYear) VALUES
+('YAA_1861', 'Yehuda', 'Alboher', 1861, 'Monastir, Turkey', 'M', 'BSC_1863', 1882),
+('BSC_1863', 'Buena', 'Camhi', 1863, 'Monastir, Turkey', 'F', 'YAA_1861', 1882),
+('SYA_1902', 'Samuel', 'Alboher', 1902, 'Monastir, Turkey', 'M', NULL, NULL),
+('EYA_1909', 'Esther', 'Alboher', 1909, 'Monastir, Turkey', 'F', NULL, NULL);
+
+INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupation, notes) VALUES
+('YAA_1861', 1, 'YehAlb1861', 'Head', 1920, 'Pen Maker', NULL),
+('BSC_1863', 1, 'YehAlb1861', 'Wife', 1920, NULL, NULL),
+('SYA_1902', 1, 'YehAlb1861', 'Son', 1920, NULL, NULL),
+('EYA_1909', 1, 'YehAlb1861', 'Daughter', 1920, NULL, NULL);
+
