@@ -210,3 +210,43 @@ INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupat
 ('EYA_1909', 1, 'YehAlb1861', 'Daughter', 1920, NULL, NULL);
 
 UPDATE addresses SET notes = 'Also known as 84 Hester St.' WHERE addressID = 10;
+
+INSERT INTO addresses (addressName, latitude, longitude, city) VALUES
+('50 Allen St', 40.716618517034114, -73.9914026621971, 'New York City');
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, sex, spouseID, marriageYear) VALUES
+('AMA_1888', 'Abraham', 'Aruty', 1888, 'Monastir, Turkey', 'M', 'OJC_1891', 1910),
+('OJC_1891', 'Ora', 'Camhi', 1891, 'Monastir, Turkey', 'F', 'AMA_1888', 1910),
+('MAA_1911', 'Max', 'Aruty', 1911, 'New York City, USA', 'M', NULL, NULL);
+
+INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupation, notes) VALUES
+('AMA_1888', 15, 'AbrAru1888', 'Head', 1920, 'Nickler', NULL),
+('OJC_1891', 15, 'AbrAru1888', 'Wife', 1920, NULL, NULL),
+('MAA_1911', 15, 'AbrAru1888', 'Son', 1920, NULL, NULL);
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, sex, spouseID, marriageYear) VALUES
+('IML_1892', 'Isaac', 'Levy', 1892, 'Monastir, Turkey', 'M', 'LMA_1896', 1916),
+('LMA_1896', 'Luna', 'Alboher', 1896, 'Monastir, Turkey', 'F', 'IML_1892', 1910),
+('BIA_1920', 'Bessie', 'Alboher', 1920, 'New York City, USA', 'F', NULL, NULL);
+
+INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupation, notes) VALUES
+('IML_1892', 15, 'IsaLev1892', 'Head', 1920, 'Presser', NULL),
+('LMA_1896', 15, 'IsaLev1892', 'Wife', 1920, NULL, NULL),
+('BIA_1920', 15, 'IsaLev1892', 'Daughter', 1920, NULL, NULL);
+
+UPDATE person SET personID = 'BIL_1920' WHERE personID = 'BIA_1920';
+UPDATE person SET lastName = 'Levy' WHERE personID = 'BIL_1920';
+UPDATE livedIn SET personID = 'BIL_1920' WHERE personID = 'BIA_1920';
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, sex, spouseID, marriageYear) VALUES
+('IMA_1892', 'Isaac', 'Alboher', 1892, 'Monastir, Turkey', 'M', 'RIP_1892', 1912),
+('RIP_1892', 'Rachel', 'Pardo', 1892, 'Monastir, Turkey', 'F', 'IMA_1892', 1912),
+('MIA_1913', 'Morris', 'Alboher', 1913, 'New York City, USA', 'M', NULL, NULL),
+('MIA_1917', 'Mike', 'Alboher', 1917, 'New York City, USA', 'M', NULL, NULL);
+
+INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupation, notes) VALUES
+('IMA_1892', 15, 'IsaAlb1892', 'Head', 1920, 'Tin Cutter', NULL),
+('RIP_1892', 15, 'IsaAlb1892', 'Wife', 1920, NULL, NULL),
+('MIA_1913', 15, 'IsaAlb1892', 'Son', 1920, NULL, NULL),
+('MIA_1917', 15, 'IsaAlb1892', 'Son', 1920, NULL, NULL);
+
