@@ -209,3 +209,4 @@ INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupat
 ('SYA_1902', 1, 'YehAlb1861', 'Son', 1920, NULL, NULL),
 ('EYA_1909', 1, 'YehAlb1861', 'Daughter', 1920, NULL, NULL);
 
+UPDATE addresses SET notes = 'Also known as 84 Hester St.' WHERE addressID = 10;
