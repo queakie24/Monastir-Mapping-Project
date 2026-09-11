@@ -118,7 +118,6 @@ function showAddressDetails(db, addressID, addressName) {
           <strong>Family of: ${headName}</strong>
         </summary>
         <div class="person-details">
-          ${family.headNotes ? `<p class="family-notes"><em>${family.headNotes}</em></p>` : ''}
           ${membersHTML}
         </div>
       </details>

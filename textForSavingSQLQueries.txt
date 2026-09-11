@@ -250,3 +250,17 @@ INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupat
 ('MIA_1913', 15, 'IsaAlb1892', 'Son', 1920, NULL, NULL),
 ('MIA_1917', 15, 'IsaAlb1892', 'Son', 1920, NULL, NULL);
 
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, sex, spouseID, marriageYear) VALUES
+('JAK_1884', 'Jacob', 'Kassiola', 1884, 'Monastir, Turkey', 'M', 'SMY_1888', 1906),
+('SMY_1888', 'Sophie', 'Yousha', 1888, 'Monastir, Turkey', 'F', 'JAK_1884', 1906),
+('GJK_1908', 'Gabriel Max', 'Kassiola', 1908, 'Monastir, Turkey', 'M', NULL, NULL),
+('BJK_1914', 'Beckie', 'Kassiola', 1914, 'New York City, USA', 'F', NULL, NULL),
+('LJK_1919', 'Lillian', 'Kassiola', 1919, 'New York City, USA', 'F', NULL, NULL);
+
+INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupation, notes) VALUES
+('JAK_1884', 9, 'IsaAlb1892', 'Head', 1920, 'Tin Lopper', 'Surname was originnally Kassorla'),
+('SMY_1888', 9, 'IsaAlb1892', 'Wife', 1920, NULL, NULL),
+('GJK_1908', 9, 'IsaAlb1892', 'Son', 1920, NULL, NULL),
+('BJK_1914', 9, 'IsaAlb1892', 'Son', 1920, NULL, NULL),
+('LJK_1919', 9, 'IsaAlb1892', 'Daughter', 1920, NULL, NULL);
+
