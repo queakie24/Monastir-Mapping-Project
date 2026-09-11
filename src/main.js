@@ -243,6 +243,10 @@ async function startMap() {
 
 startMap();
 
+//SUPER IMPORTANT
+// - Make it so markers on map collapse into single markers with a number in them
+//   so the map doesn't look insanely crowded when we add ones close together
+
 //THINGS FOR NEXT TIME
 // - Make dropdowns look better within side panel
 // - Make sure text is not too small and is easily readable
