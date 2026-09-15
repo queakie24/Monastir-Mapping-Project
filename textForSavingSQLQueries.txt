@@ -258,9 +258,14 @@ INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, sex, s
 ('LJK_1919', 'Lillian', 'Kassiola', 1919, 'New York City, USA', 'F', NULL, NULL);
 
 INSERT INTO livedIn(personID, addressID, familyID, relationToHead, year, occupation, notes) VALUES
-('JAK_1884', 9, 'IsaAlb1892', 'Head', 1920, 'Tin Lopper', 'Surname was originnally Kassorla'),
-('SMY_1888', 9, 'IsaAlb1892', 'Wife', 1920, NULL, NULL),
-('GJK_1908', 9, 'IsaAlb1892', 'Son', 1920, NULL, NULL),
-('BJK_1914', 9, 'IsaAlb1892', 'Son', 1920, NULL, NULL),
-('LJK_1919', 9, 'IsaAlb1892', 'Daughter', 1920, NULL, NULL);
+('JAK_1884', 9, 'JacKas1884', 'Head', 1920, 'Tin Lopper', 'Surname was originnally Kassorla'),
+('SMY_1888', 9, 'JacKas1884', 'Wife', 1920, NULL, NULL),
+('GJK_1908', 9, 'JacKas1884', 'Son', 1920, NULL, NULL),
+('BJK_1914', 9, 'JacKas1884', 'Son', 1920, NULL, NULL),
+('LJK_1919', 9, 'JacKas1884', 'Daughter', 1920, NULL, NULL);
+
+UPDATE livedIn SET notes = NULL WHERE personID = 'JAK_1884';
+UPDATE person SET notes = 'Surname was originally Kassorla' WHERE personID = 'JAK_1884';
+
+UPDATE livedIn SET familyID = 'JacKas1884' WHERE addressID = 9;
 
