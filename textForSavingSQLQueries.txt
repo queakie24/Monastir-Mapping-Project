@@ -269,3 +269,33 @@ UPDATE person SET notes = 'Surname was originally Kassorla' WHERE personID = 'JA
 
 UPDATE livedIn SET familyID = 'JacKas1884' WHERE addressID = 9;
 
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('JAC_1864', 'Juda', 'Camhi', 1864, 'Monastir, Turkey', 'RJP_1863', '1882', 'M'),
+('RJP_1863', 'Reina', 'Pesso', 1863, 'Monastir, Turkey', 'JAC_1864', '1882', 'F'),
+('AJC_1882', 'Abraham', 'Camhi', 1882, 'Monastir, Turkey', NULL, NULL, 'M'),
+('EJC_1896', 'Elias', 'Camhi', 1896, 'Monastir, Turkey', NULL, NULL, 'M');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('JAC_1864', 9, 'JudCam1864', 'Head', 1920, 'Shoe Blacker'),
+('RJP_1863', 9, 'JudCam1864', 'Wife', 1920, NULL),
+('AJC_1882', 9, 'JudCam1864', 'Son', 1920, 'Blubbers Peddler'),
+('EJC_1896', 9, 'JudCam1864', 'Son', 1920, 'Tin Platter');
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('LHM_1883', 'Louis', 'Meshulam', 1883, 'Monastir, Turkey', 'RUnE_1886', 1906, 'M'),
+('RUnE_1886', 'Rebecca', 'Eskenazi', 1886, 'Monastir, Turkey', 'LHM_1883', 1906, 'F'),
+('PLM_1910', 'Pauline', 'Meshulam', 1910, 'Monastir, Turkey', NULL, NULL, 'F'),
+('HLM_1914', 'Hyman', 'Meshulam', 1914, 'New York City, USA', NULL, NULL, 'M'),
+('JLM_1916', 'Jacob', 'Meshulam', 1916, 'New York City, USA', NULL, NULL, 'M'),
+('JLM_1919', 'Joseph', 'Meshulam', 1919, 'New York City, USA', NULL, NULL, 'M');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('LHM_1883', 10, 'LouMes1883', 'Head', 1920, 'Tin Can Carter'),
+('RUnE_1886', 10, 'LouMes1883', 'Wife', 1920, NULL),
+('PLM_1910', 10, 'LouMes1883', 'Daughter', 1920, NULL),
+('HLM_1914', 10, 'LouMes1883', 'Son', 1920, NULL),
+('JLM_1916', 10, 'LouMes1883', 'Son', 1920, NULL),
+('JLM_1919', 10, 'LouMes1883', 'Son', 1920, NULL);
+
+UPDATE livedIn SET addressID = 9 WHERE familyID = 'LouMes1883';
+
