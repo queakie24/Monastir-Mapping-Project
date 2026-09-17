@@ -299,3 +299,62 @@ INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupa
 
 UPDATE livedIn SET addressID = 9 WHERE familyID = 'LouMes1883';
 
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('GIP_1873', 'Gabriel', 'Pardo', 1973, 'Monastir, Turkey', 'SJC_1878', '1892', 'M'),
+('SJC_1878', 'Sarah', 'Calderon', 1878, 'Monastir, Turkey', 'GIP_1873', '1892', 'F'),
+('JGP_1898', 'Joseph', 'Pardo', 1898, 'Monastir, Turkey', NULL, NULL, 'M'),
+('SGP_1902', 'Solomon', 'Pardo', 1902, 'Monastir, Turkey', NULL, NULL, 'M'),
+('LGP_1905', 'Lena', 'Pardo', 1905, 'Monastir, Turkey', NULL, NULL, 'F'),
+('AGP_1906', 'Anna', 'Pardo', 1906, 'Monastir, Turkey', NULL, NULL, 'F'),
+('MGP_1911', 'Matilda', 'Pardo', 1911, 'Monastir, Turkey', NULL, NULL, 'F'),
+('BGP_1912', 'Betty', 'Pardo', 1912, 'New York City, USA', NULL, NULL, 'F'),
+('BGP_1918', 'Bessie', 'Pardo', 1918, 'New York City, USA', NULL, NULL, 'F');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('GIP_1873', 8, 'GabPar1873', 'Head', 1920, 'Dishwasher'),
+('SJC_1878', 8, 'GabPar1873', 'Wife', 1920, NULL),
+('JGP_1898', 8, 'GabPar1873', 'Son', 1920, 'Dishwasher'),
+('SGP_1902', 8, 'GabPar1873', 'Son', 1920, 'Porter'),
+('LGP_1905', 8, 'GabPar1873', 'Daughter', 1920, 'Operator'),
+('AGP_1906', 8, 'GabPar1873', 'Daughter', 1920, NULL),
+('MGP_1911', 8, 'GabPar1873', 'Daughter', 1920, NULL),
+('BGP_1912', 8, 'GabPar1873', 'Daughter', 1920, NULL),
+('BGP_1918', 8, 'GabPar1873', 'Daughter', 1920, NULL);
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('JUnA_1876', 'Joseph', 'Aronesti', 1876, 'Monastir, Turkey', 'SHA_1880', '1897', 'M'),
+('SHA_1880', 'Sophie', 'Aronesty', 1880, 'Monastir, Turkey', 'JUnA_1876', '1897', 'F'),
+('BJA_1901', 'Bessie', 'Aronesti', 1901, 'Monastir, Turkey', NULL, NULL, 'F'),
+('MJA_1902', 'Mathilda', 'Aronesti', 1902, 'Monastir, Turkey', NULL, NULL, 'F'),
+('RJA_1911', 'Rebecca', 'Aronesti', 1911, 'New York City, USA', NULL, NULL, 'F'),
+('VJA_1913', 'Victoria', 'Aronesti', 1913, 'St. Louis, USA', NULL, NULL, 'F'),
+('HJA_1915', 'Hyman', 'Aronesti', 1915, 'St. Louis, USA', NULL, NULL, 'M'),
+('LJA_1917', 'Lena', 'Aronesti', 1917, 'New York City, USA', NULL, NULL, 'F'),
+('AJA_1919', 'Abraham', 'Aronesti', 1919, 'New York City, USA', NULL, NULL, 'M');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('JUnA_1876', 8, 'JosAro1876', 'Head', 1920, 'Skirt Peddler'),
+('SHA_1880', 8, 'JosAro1876', 'Wife', 1920, NULL),
+('BJA_1901', 8, 'JosAro1876', 'Daughter', 1920, NULL),
+('MJA_1902', 8, 'JosAro1876', 'Daughter', 1920, 'Machine Operator'),
+('RJA_1911', 8, 'JosAro1876', 'Daughter', 1920, NULL),
+('VJA_1913', 8, 'JosAro1876', 'Daughter', 1920, NULL),
+('HJA_1915', 8, 'JosAro1876', 'Son', 1920, NULL),
+('LJA_1917', 8, 'JosAro1876', 'Daughter', 1920, NULL),
+('AJA_1919', 8, 'JosAro1876', 'Son', 1920, NULL);
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('MIC_1870', 'Michael', 'Calderon', 1870, 'Monastir, Turkey', 'RML_1872', '1887', 'M'),
+('RML_1872', 'Reina', 'Levy', 1872, 'Monastir, Turkey', 'RML_1872', '1887', 'F'),
+('AMC_1906', 'Abraham', 'Calderon', 1906, 'Monastir, Turkey', NULL, NULL, 'M'),
+('LMC_1910', 'Louis', 'Calderon', 1910, 'Monastir, Turkey', NULL, NULL, 'M'),
+('LMC_1913', 'Lee', 'Calderon', 1913, 'Monastir, Turkey', NULL, NULL, 'F'),
+('MJL_1917', 'Morris', 'Levy', 1917, 'Rochester, USA', NULL, NULL, 'M');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('MIC_1870', 4, 'MicCal1870', 'Head', 1920, 'Proprietor'),
+('RML_1872', 4, 'MicCal1870', 'Wife', 1920, NULL),
+('AMC_1906', 4, 'MicCal1870', 'Son', 1920, NULL),
+('LMC_1910', 4, 'MicCal1870', 'Son', 1920, NULL),
+('LMC_1913', 4, 'MicCal1870', 'Daughter', 1920, NULL),
+('MJL_1917', 4, 'MicCal1870', 'Nephew', 1920, NULL);
