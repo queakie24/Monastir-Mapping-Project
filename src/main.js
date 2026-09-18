@@ -12,8 +12,8 @@ const CITY_CONFIG = {
   'Bitola':        { center: [41.0310, 21.3340], zoom: 15, years: [1943] }
 };
 
-// Layer group for dynamic markers
-const currentCityMarkers = L.layerGroup();
+// Layer group for dynamic markers with clustering
+const currentCityMarkers = L.markerClusterGroup();
 
 // Initialize Map
 const initialConfig = CITY_CONFIG[currentCity];
@@ -42,7 +42,7 @@ function showAddressDetails(db, addressID, addressName) {
   const panel = document.getElementById('sidepanel');
   const content = document.getElementById('sidepanelcontent');
 
-  // Query ALL people at this address for the current year
+  // Query ALL people at this address, ordered by Head first, then Spouse, then others
   const sqlAll = `
     SELECT
       l.familyID,
@@ -58,10 +58,17 @@ function showAddressDetails(db, addressID, addressName) {
     JOIN person p ON l.personID = p.personID
     WHERE l.addressID = $addressID
       AND l.year = $year
+    ORDER BY 
+      l.familyID,
+      CASE 
+        WHEN l.relationToHead = 'Head' THEN 1
+        WHEN l.relationToHead = 'Wife' OR l.relationToHead = 'Spouse' THEN 2
+        ELSE 3 
+      END
   `;
 
   const stmtAll = db.prepare(sqlAll);
-  stmtAll.bind({ $addressID: addressID, $year: currentYear });
+  stmtAll.bind({ $addressID: addressID,$year: currentYear });
 
   // 1. Group individuals by familyID
   const familiesMap = {};
@@ -133,7 +140,6 @@ function showAddressDetails(db, addressID, addressName) {
     <h3>Families</h3>
     ${count > 0 ? familiesHTML : '<p>No family records found.</p>'}
   `;
-  //Eventually add notes section for the sidepanel underneath the count of families
 
   panel.classList.add('open');
 }
@@ -170,7 +176,7 @@ function loadCityMarkers(db, cityName, selectedYear) {
   `;
 
   const stmt = db.prepare(sql);
-  stmt.bind({ $city: cityName, $year: Number(selectedYear) });
+  stmt.bind({ $city: cityName,$year: Number(selectedYear) });
 
   while (stmt.step()) {
     const row = stmt.getAsObject();
@@ -178,7 +184,7 @@ function loadCityMarkers(db, cityName, selectedYear) {
     if (row.latitude && row.longitude) {
       const marker = L.marker([row.latitude, row.longitude]).bindPopup(`<b>${row.addressName}</b><br> Families: ${row.familyCount}`);
 
-      marker.on('click', () => {showAddressDetails(db, row.addressID, row.addressName);})
+      marker.on('click', () => { showAddressDetails(db, row.addressID, row.addressName); });
       
       currentCityMarkers.addLayer(marker);
     }
@@ -218,8 +224,9 @@ function onCityChange(event) {
   const config = CITY_CONFIG[currentCity];
 
   if (config) {
+    closeSidePanel();
     map.setView(config.center, config.zoom);
-    updateYearDropdown(currentCity); // Also resets currentYear internally
+    updateYearDropdown(currentCity);
     loadCityMarkers(db, currentCity, currentYear);
   }
 }

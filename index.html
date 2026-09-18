@@ -13,6 +13,10 @@
         crossorigin=""
     />
 
+    <!-- Leaflet Marker Cluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+
     <!-- Your stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -36,6 +40,7 @@
     </header>
 
     <div id="map"></div>
+
     <div id="sidepanel">
         <button id="closepanel" class="close-btn">&times;</button>
         <div id="sidepanelcontent">
@@ -50,6 +55,9 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""
     ></script>
+
+    <!-- Leaflet Marker Cluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
     <!-- Load Local SQL.js Library BEFORE main.js -->
     <script src="lib/sql-wasm.js"></script>
