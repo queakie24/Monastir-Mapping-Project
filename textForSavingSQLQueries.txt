@@ -358,3 +358,21 @@ INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupa
 ('LMC_1910', 4, 'MicCal1870', 'Son', 1920, NULL),
 ('LMC_1913', 4, 'MicCal1870', 'Daughter', 1920, NULL),
 ('MJL_1917', 4, 'MicCal1870', 'Nephew', 1920, NULL);
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('ASA_1881', 'Abraham', 'Aroesty', 1881, 'Monastir, Turkey', 'AHN_1883', '1904', 'M'),
+('AHN_1883', 'Anna', 'Navon', 1883, 'Monastir, Turkey', 'ASA_1881', '1904', 'F'),
+('RAA_1911', 'Rachel', 'Aroesty', 1911, 'New York City, USA', '', '', 'F'),
+('LAA_1912', 'Lena', 'Aroesty', 1912, 'New York City, USA', '', '', 'F'),
+('CAA_1914', 'Celia', 'Aroesty', 1914, 'New York City, USA', '', '', 'F'),
+('BAA_1915', 'Bessie', 'Aroesty', 1915, 'New York City, USA', '', '', 'F'),
+('SAA_1919', 'Samuel', 'Aroesty', 1919, 'New York City, USA', '', '', 'M');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('ASA_1881', 2, 'AbrAro1881', 'Head', 1920, 'Tinsmith'),
+('AHN_1883', 2, 'AbrAro1881', 'Wife', 1920, ''),
+('RAA_1911', 2, 'AbrAro1881', 'Daughter', 1920, ''),
+('LAA_1912', 2, 'AbrAro1881', 'Daughter', 1920, ''),
+('CAA_1914', 2, 'AbrAro1881', 'Daughter', 1920, ''),
+('BAA_1915', 2, 'AbrAro1881', 'Daughter', 1920, ''),
+('SAA_1919', 2, 'AbrAro1881', 'Son', 1920, '');
