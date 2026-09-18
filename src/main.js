@@ -63,7 +63,8 @@ function showAddressDetails(db, addressID, addressName) {
       CASE 
         WHEN l.relationToHead = 'Head' THEN 1
         WHEN l.relationToHead = 'Wife' OR l.relationToHead = 'Spouse' THEN 2
-        ELSE 3 
+        WHEN l.relationToHead = 'Son' OR l.relationToHead = 'Daughter' THEN 3
+        ELSE 4
       END
   `;
 
@@ -250,22 +251,12 @@ async function startMap() {
 
 startMap();
 
-//SUPER IMPORTANT
-// - Make it so markers on map collapse into single markers with a number in them
-//   so the map doesn't look insanely crowded when we add ones close together
-
 //THINGS FOR NEXT TIME
 // - Make dropdowns look better within side panel
 // - Make sure text is not too small and is easily readable
 // - Start adding more families to the database
 // -- Including different years / cities
 // - See how adding photos works and how it displays in the dropdown
-
-//ANOTHER PROBLEM WITH DATABASE
-// - Sidepanel displays each family in the order they were inserted into the DB
-// - Possibility for Head of family to be at the end instead of at the top
-// - Order of rest does not matter, but Head and Spouse should be at the top
-// - Find a fix or insert in specific order every time
 
 //PROBLEMS WITH DATABASE/CODE
 // - Added spouseID and marriageYear to correctly display married/maiden name in sidepanel
@@ -274,7 +265,4 @@ startMap();
 // - Can do the same with marriage years, for-loop to iterate through and match in-order years to spouses
 
 //Change how the drop down looks and the whole title bar at the top
-//And after that make it so each data point button has different info on the panel
-
-//Read through the side panel and button code so I understand it myself, and know how to make it customizable
 //Start making things look pretty
