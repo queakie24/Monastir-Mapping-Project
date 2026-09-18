@@ -8,7 +8,7 @@ const CITY_CONFIG = {
   'New York City': { center: [40.715, -73.985], zoom: 15, years: [1910, 1920, 1930, 1940] },
   'Rochester':     { center: [43.1566, -77.6088], zoom: 15, years: [1910, 1920, 1930, 1940] },
   'Indianapolis':  { center: [39.7682, -86.1581], zoom: 15, years: [1910, 1920, 1930, 1940] },
-  'Paris':         { center: [48.8534, 2.3488], zoom: 15, years: [1926, 1931, 1936] },
+  'Paris':         { center: [48.8534, 2.3488], zoom: 13, years: [1926, 1931, 1936] },
   'Bitola':        { center: [41.0310, 21.3340], zoom: 15, years: [1943] }
 };
 
@@ -218,6 +218,7 @@ function updateYearDropdown(cityName) {
 function onYearChange(event) {
   currentYear = Number(event.target.value);
   loadCityMarkers(db, currentCity, currentYear);
+  closeSidePanel();
 }
 
 function onCityChange(event) {

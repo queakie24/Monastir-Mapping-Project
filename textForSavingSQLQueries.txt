@@ -23,7 +23,7 @@ CREATE TABLE livedIn (
     relationToHead TEXT,
     year INT,
     occupation TEXT,
-    PRIMARY KEY (personID, addressID),
+    PRIMARY KEY (personID, addressID, year),
     FOREIGN KEY (personID) REFERENCES person(personID),
     FOREIGN KEY (addressID) REFERENCES addresses(addressID)
 );
@@ -416,4 +416,30 @@ INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupa
 ('MJC_1911', 6, 'JacCal1876', 'Son', 1920, ''),
 ('IJC_1915', 6, 'JacCal1876', 'Son', 1920, ''),
 ('AJC_1918', 6, 'JacCal1876', 'Daughter', 1920, '');
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('ISC_1873', 'Isaac', 'Colonomos', 1873, 'Monastir, Turkey', 'CSE_1876', '1896', 'M'),
+('CSE_1876', 'Clara', 'Ergas', 1876, 'Monastir, Turkey', 'ISC_1873', '1896', 'F'),
+('SIC_1900', 'Salomon', 'Colonomos', 1900, 'Monastir, Turkey', '', '', 'M'),
+('MIC_1906', 'Marie', 'Colonomos', 1906, 'Monastir, Turkey', '', '', 'F'),
+('AIC_1908', 'Albert', 'Colonomos', 1908, 'Monastir, Turkey', '', '', 'M'),
+('LIC_1913', 'Louna', 'Colonomos', 1913, 'Monastir, Turkey', '', '', 'F');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('ISC_1873', 11, 'IsaCol1873', 'Head', 1926, 'Commission Agent'),
+('CSE_1876', 11, 'IsaCol1873', 'Wife', 1926, ''),
+('MIC_1906', 11, 'IsaCol1873', 'Daughter', 1926, 'Student'),
+('AIC_1908', 11, 'IsaCol1873', 'Son', 1926, ''),
+('LIC_1913', 11, 'IsaCol1873', 'Daughter', 1926, ''),
+
+('ISC_1873', 11, 'IsaCol1873', 'Head', 1931, 'Commission Agent'),
+('CSE_1876', 11, 'IsaCol1873', 'Wife', 1931, ''),
+('SIC_1900', 11, 'IsaCol1873', 'Son', 1931, 'Shopkeeper'),
+('AIC_1908', 11, 'IsaCol1873', 'Son', 1931, ''),
+('LIC_1913', 11, 'IsaCol1873', 'Daughter', 1931, 'Student'),
+
+('ISC_1873', 11, 'IsaCol1873', 'Head', 1936, 'Shopkeeper'),
+('CSE_1876', 11, 'IsaCol1873', 'Wife', 1936, ''),
+('SIC_1900', 11, 'IsaCol1873', 'Son', 1936, 'Employee'),
+('LIC_1913', 11, 'IsaCol1873', 'Daughter', 1936, 'Stenographer');
 
