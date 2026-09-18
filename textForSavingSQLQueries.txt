@@ -376,3 +376,44 @@ INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupa
 ('CAA_1914', 2, 'AbrAro1881', 'Daughter', 1920, ''),
 ('BAA_1915', 2, 'AbrAro1881', 'Daughter', 1920, ''),
 ('SAA_1919', 2, 'AbrAro1881', 'Son', 1920, '');
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('DJB_1865', 'Daniel', 'Baruch', 1865, 'Monastir, Turkey', 'DUT_1871', '1887', 'M'),
+('DUnT_1871', 'Donna', 'Testa', 1871, 'Monastir, Turkey', 'DJB_1865', '1887', 'F'),
+('IDB_1896', 'Isaac', 'Baruch', 1896, 'Monastir, Turkey', '', '', 'M'),
+('LDB_1899', 'Louis', 'Baruch', 1899, 'Monastir, Turkey', '', '', 'M'),
+('MDB_1902', 'Mathilda', 'Baruch', 1902, 'Monastir, Turkey', '', '', 'F'),
+('NDB_1905', 'Nathan', 'Baruch', 1905, 'Monastir, Turkey', '', '', 'M'),
+('JDB_1908', 'Joseph', 'Baruch', 1908, 'Monastir, Turkey', '', '', 'M');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('DJB_1865', 6, 'DanBar1865', 'Head', 1920, ''),
+('DUnT_1871', 6, 'DanBar1865', 'Wife', 1920, ''),
+('IDB_1896', 6, 'DanBar1865', 'Son', 1920, 'Operator'),
+('LDB_1899', 6, 'DanBar1865', 'Son', 1920, 'Boot Black'),
+('MDB_1902', 6, 'DanBar1865', 'Daughter', 1920, ''),
+('NDB_1905', 6, 'DanBar1865', 'Son', 1920, ''),
+('JDB_1908', 6, 'DanBar1865', 'Son', 1920, '');
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('JAC_1876', 'Jacob', 'Calderon', 1876, 'Monastir, Turkey', 'PDC_1873', '1900', 'M'),
+('PDC_1873', 'Pauline', 'Camhi', 1873, 'Monastir, Turkey', 'JAC_1876', '1900', 'F'),
+('EJC_1904', 'Esther', 'Calderon', 1904, 'Monastir, Turkey', '', '', 'F'),
+('AJC_1904', 'Albert', 'Calderon', 1904, 'Monastir, Turkey', '', '', 'M'),
+('RJC_1908', 'Rachel', 'Calderon', 1908, 'Monastir, Turkey', '', '', 'F'),
+('SJC_1910', 'Shirley', 'Calderon', 1910, 'Monastir, Turkey', '', '', 'F'),
+('MJC_1911', 'Morris', 'Calderon', 1911, 'Monastir, Turkey', '', '', 'M'),
+('IJC_1915', 'Irving', 'Calderon', 1915, 'New York City, USA', '', '', 'M'),
+('AJC_1918', 'Allegra', 'Calderon', 1918, 'New York City, USA', '', '', 'F');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('JAC_1876', 6, 'JacCal1876', 'Head', 1920, 'Rabbi'),
+('PDC_1873', 6, 'JacCal1876', 'Wife', 1920, ''),
+('EJC_1904', 6, 'JacCal1876', 'Daughter', 1920, 'Operator'),
+('AJC_1904', 6, 'JacCal1876', 'Son', 1920, 'Operator'),
+('RJC_1908', 6, 'JacCal1876', 'Daughter', 1920, ''),
+('SJC_1910', 6, 'JacCal1876', 'Daughter', 1920, ''),
+('MJC_1911', 6, 'JacCal1876', 'Son', 1920, ''),
+('IJC_1915', 6, 'JacCal1876', 'Son', 1920, ''),
+('AJC_1918', 6, 'JacCal1876', 'Daughter', 1920, '');
+
