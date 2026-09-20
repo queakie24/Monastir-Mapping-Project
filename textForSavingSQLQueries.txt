@@ -443,3 +443,57 @@ INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupa
 ('SIC_1900', 11, 'IsaCol1873', 'Son', 1936, 'Employee'),
 ('LIC_1913', 11, 'IsaCol1873', 'Daughter', 1936, 'Stenographer');
 
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('MMC_1880', 'Mentesh', 'Camhi', 1880, 'Monastir, Turkey', 'SSC_1888', '1908', 'M'),
+('SSC_1888', 'Sol', 'Colonomos', 1888, 'Monastir, Turkey', 'MMC_1880', '1908', 'F'),
+('MMC_1908', 'Marguerite', 'Camhi', 1908, 'Monastir, Turkey', '', '', 'F'),
+('VMC_1911', 'Victorine', 'Camhi', 1911, 'Monastir, Turkey', '', '', 'F'),
+('MMC_1914', 'Moise', 'Camhi', 1914, 'Monastir, Turkey', '', '', 'M'),
+('SMC_1920', 'Salomon', 'Camhi', 1920, 'Skopje, Yugoslavia', '', '', 'M');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('MMC_1880', 12, 'MenCam1880', 'Head', 1926, 'Commercial Representative'),
+('SSC_1888', 12, 'MenCam1880', 'Wife', 1926, ''),
+('MMC_1908', 12, 'MenCam1880', 'Daughter', 1926, ''),
+('VMC_1911', 12, 'MenCam1880', 'Daughter', 1926, ''),
+('MMC_1914', 12, 'MenCam1880', 'Son', 1926, ''),
+('SMC_1920', 12, 'MenCam1880', 'Son', 1926, ''),
+
+('MMC_1880', 12, 'MenCam1880', 'Head', 1931, 'Commercial Representative'),
+('SSC_1888', 12, 'MenCam1880', 'Wife', 1931, ''),
+('MMC_1908', 12, 'MenCam1880', 'Daughter', 1931, ''),
+('VMC_1911', 12, 'MenCam1880', 'Daughter', 1931, ''),
+('MMC_1914', 12, 'MenCam1880', 'Son', 1931, 'Student'),
+('SMC_1920', 12, 'MenCam1880', 'Son', 1931, '');
+
+INSERT INTO addresses (addressName, latitude, longitude, city) VALUES
+('166 Boulevard Voltaire', 48.85548334442631, 2.383598484234409, 'Paris');
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('ANH_1868', 'Abraham', 'Hallivis', 1868, 'Monastir, Turkey', 'RSC_1876', '1901', 'M'),
+('RSC_1876', 'Rebecca', 'Colonomos', 1876, 'Monastir, Turkey', 'ANH_1868', '1901', 'F'),
+('MAH_1901', 'Marie Myriam', 'Hallivis', 1901, 'Monastir, Turkey', 'LSF_1904', '1923', 'F'),
+('DAH_1904', 'Donna', 'Hallivis', 1904, 'Monastir, Turkey', 'AJS_1904', '1930', 'F'),
+('LSF_1904', 'Lieto', 'Florentin', 1904, 'Salonica, Greece', 'MAH_1901', '1923', 'M'),
+('AJS_1904', 'Albert', 'Sulema', 1904, 'Salonica, Greece', 'DAH_1904', '1930', 'M'),
+('SLF_1924', 'Salomon', 'Florentin', 1924, 'Paris, France', '', '', 'M'),
+('CAS_1930', 'Clairette', 'Sulema', 1930, 'Paris, France', '', '', 'F');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('ANH_1868', 16, 'AbrHal1868', 'Head', 1926, 'Womens-wear Worker'),
+('RSC_1876', 16, 'AbrHal1868', 'Wife', 1926, ''),
+('DAH_1904', 16, 'AbrHal1868', 'Daughter', 1926, ''),
+('MAH_1901', 16, 'AbrHal1868', 'Daughter', 1926, ''),
+('LSF_1904', 16, 'AbrHal1868', 'Son-in-law', 1926, 'Commercial Representative'),
+('SLF_1924', 16, 'AbrHal1868', 'Grandson', 1926, ''),
+
+('ANH_1868', 16, 'AbrHal1868', 'Head', 1931, 'Womens-wear Worker'),
+('RSC_1876', 16, 'AbrHal1868', 'Wife', 1931, ''),
+('DAH_1904', 16, 'AbrHal1868', 'Daughter', 1931, ''),
+('AJS_1904', 16, 'AbrHal1868', 'Son-in-law', 1931, 'Employee'),
+('CAS_1930', 16, 'AbrHal1868', 'Granddaughter', 1931, '');
+
+UPDATE livedIn
+SET notes = 'Albert''s mother Clara and a relative Robert Sulema are living with the family as well.' 
+WHERE personID = 'ANH_1868' AND year = 1931;
+

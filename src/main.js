@@ -53,6 +53,7 @@ function showAddressDetails(db, addressID, addressName) {
       p.lastName,
       p.birthYear,
       p.birthPlace,
+      l.occupation,
       p.notes
     FROM livedIn l
     JOIN person p ON l.personID = p.personID
@@ -110,11 +111,13 @@ function showAddressDetails(db, addressID, addressName) {
       const relation = member.relationToHead ? ` (${member.relationToHead})` : '';
       const birthyear = member.birthYear ? `b. ${member.birthYear}` : '';
       const birthplace = member.birthPlace ? `${member.birthPlace}` : '';
+      const occupation = member.occupation ? `${member.occupation}` : '';
 
       return `
         <div class="individual-card">
           <p>${memberName}${relation}</p>
           <p>${birthyear} in ${birthplace}</p>
+          <p>${occupation}</p>
           <p>${member.notes ? member.notes : 'No extra notes available.'}</p>
         </div>
       `;
