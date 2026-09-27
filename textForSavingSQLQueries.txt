@@ -497,3 +497,120 @@ UPDATE livedIn
 SET notes = 'Albert''s mother Clara and a relative Robert Sulema are living with the family as well.' 
 WHERE personID = 'ANH_1868' AND year = 1931;
 
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('SEB_1891', 'Samuel', 'Becker', 1891, 'Monastir, Turkey', 'RJN_1891', '1912', 'M'),
+('RJN_1891', 'Rebecca', 'Negrin', 1891, 'Monastir, Turkey', 'SEB_1891', '1912', 'F'),
+('LSB_1914', 'Louis', 'Becker', 1914, 'New York City, USA', '', '', 'M'),
+('JSB_1915', 'Joseph', 'Becker', 1915, 'New York City, USA', '', '', 'M'),
+('SSB_1918', 'Sydelle', 'Becker', 1918, 'New York City, USA', '', '', 'F'),
+('PJN_1894', 'Pincus', 'Negrin', 1894, 'Monastir, Turkey', '', '', 'M');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('SEB_1891', 3, 'SamBec1891', 'Head', 1920, 'Tinsmith'),
+('RJN_1891', 3, 'SamBec1891', 'Wife', 1920, ''),
+('LSB_1914', 3, 'SamBec1891', 'Son', 1920, ''),
+('JSB_1915', 3, 'SamBec1891', 'Son', 1920, ''),
+('SSB_1918', 3, 'SamBec1891', 'Daughter', 1920, ''),
+('PJN_1894', 3, 'SamBec1891', 'Brother-in-Law', 1920, 'Presser');
+
+UPDATE addresses SET latitude = 40.72190953967704, longitude = -73.98814731667335 WHERE addressID = 4;
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('MRK_1887', 'Morris', 'Kamhi', 1887, 'Monastir, Turkey', '', '', 'M'),
+('DRK_1893', 'David', 'Kamhi', 1893, 'Monastir, Turkey', '', '', 'M'),
+('MRK_1896', 'Mathilda', 'Kamhi', 1896, 'Monastir, Turkey', '', '', 'F'),
+('ERK_1897', 'Esther', 'Kamhi', 1897, 'Monastir, Turkey', '', '', 'F'),
+('HRK_1898', 'Harry', 'Kamhi', 1898, 'Monastir, Turkey', '', '', 'M'),
+('LRK_1902', 'Louis', 'Kamhi', 1902, 'Monastir, Turkey', '', '', 'M'),
+('JRK_1910', 'Jacob', 'Kamhi', 1910, 'New York City, USA', '', '', 'M'),
+('IRK_1910', 'Isaac', 'Kamhi', 1910, 'New York City, USA', '', '', 'M');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('RAK_1864', 13, 'RapKam1864', 'Head', 1910, 'Soda Water'),
+('RMA_1888', 13, 'RapKam1864', 'Wife', 1910, ''),
+('MRK_1887', 13, 'RapKam1864', 'Son', 1910, 'Tinsmith'),
+('DRK_1893', 13, 'RapKam1864', 'Son', 1910, 'Tailor'),
+('MRK_1896', 13, 'RapKam1864', 'Daughter', 1910, 'Operator'),
+('ERK_1897', 13, 'RapKam1864', 'Daughter', 1910, ''),
+('HRK_1898', 13, 'RapKam1864', 'Son', 1910, ''),
+('LRK_1902', 13, 'RapKam1864', 'Son', 1910, ''),
+('MRK_1906', 13, 'RapKam1864', 'Son', 1910, ''),
+('JRK_1910', 13, 'RapKam1864', 'Son', 1910, ''),
+('IRK_1910', 13, 'RapKam1864', 'Son', 1910, '');
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('HAA_1920', 'Haskell', 'Aroesty', 1920, 'New York City, USA', '', '', 'M');
+
+INSERT INTO addresses (addressName, latitude, longitude, city) VALUES
+('363 Bedford Ave', 40.71147504958586, -73.96308732908044, 'New York City');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('ASA_1881', 17, 'AbrAro1881', 'Head', 1930, 'Tinsmith'),
+('AHN_1883', 17, 'AbrAro1881', 'Wife', 1930, ''),
+('RAA_1911', 17, 'AbrAro1881', 'Daughter', 1930, ''),
+('LAA_1912', 17, 'AbrAro1881', 'Daughter', 1930, ''),
+('CAA_1914', 17, 'AbrAro1881', 'Daughter', 1930, ''),
+('BAA_1915', 17, 'AbrAro1881', 'Daughter', 1930, ''),
+('SAA_1919', 17, 'AbrAro1881', 'Son', 1930, ''),
+('HAA_1920', 17, 'AbrAro1881', 'Son', 1930, '');
+
+UPDATE addresses SET addressName = '182-184 Allen St' WHERE addressID = 4;
+UPDATE addresses SET latitude = 40.7218480352047, longitude = -73.98870654773717 WHERE addressID = 4;
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('MIC_1870', 1, 'MicCal1870', 'Head', 1930, 'Proprietor'),
+('RML_1872', 1, 'MicCal1870', 'Wife', 1930, NULL),
+('AMC_1906', 1, 'MicCal1870', 'Son', 1930, 'Operator'),
+('LMC_1910', 1, 'MicCal1870', 'Son', 1930, 'Operator'),
+('LMC_1913', 1, 'MicCal1870', 'Daughter', 1930, 'Operator'),
+('MJL_1917', 1, 'MicCal1870', 'Nephew', 1930, NULL);
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('DJB_1865', 6, 'DanBar1865', 'Head', 1930, ''),
+('DUnT_1871', 6, 'DanBar1865', 'Wife', 1930, ''),
+('MDB_1902', 6, 'DanBar1865', 'Daughter', 1930, ''),
+('JDB_1908', 6, 'DanBar1865', 'Son', 1930, '');
+
+INSERT INTO person (personID, firstName, lastName, birthYear, birthPlace, spouseID, marriageYear, sex) VALUES
+('AJB_1873', 'Abraham', 'Baruch', 1873, 'Monastir, Turkey', 'RYA_1875', '1891', 'M'),
+('RYA_1875', 'Rebecca', 'Albucar', 1875, 'Monastir, Turkey', 'AJB_1873', '1891', 'F'),
+('AAB_1894', 'Annie', 'Baruch', 1894, 'Monastir, Turkey', '', '', 'F'),
+('JAB_1897', 'Jacob', 'Baruch', 1897, 'Monastir, Turkey', '', '', 'M'),
+('LAB_1899', 'Louis', 'Baruch', 1899, 'Monastir, Turkey', '', '', 'M'),
+('CAB_1901', 'Clara', 'Baruch', 1901, 'Monastir, Turkey', '', '', 'F'),
+('SAB_1906', 'Sarah', 'Baruch', 1906, 'Monastir, Turkey', '', '', 'F'),
+('IAB_1909', 'Isidore', 'Baruch', 1909, 'Monastir, Turkey', '', '', 'M'),
+('BAB_1912', 'Benjamin', 'Baruch', 1912, 'New York City, USA', '', '', 'M'),
+('LAB_1915', 'Lena', 'Baruch', 1915, 'New York City, USA', '', '', 'F'),
+('RAB_1919', 'Rachel', 'Baruch', 1919, 'New York City, USA', '', '', 'F');
+
+INSERT INTO addresses (addressName, latitude, longitude, city) VALUES
+('93 Allen St', 40.71870444191422, -73.99101610633792, 'New York City');
+
+INSERT INTO livedIn (personID, addressID, familyID, relationToHead, year, occupation) VALUES
+('AJB_1873', 14, 'AbrBar1873', 'Head', 1910, 'Tinsmith'),
+('RYA_1875', 14, 'AbrBar1873', 'Wife', 1910, ''),
+('AAB_1894', 14, 'AbrBar1873', 'Daughter', 1910, 'Seamstress'),
+('JAB_1897', 14, 'AbrBar1873', 'Son', 1910, ''),
+('LAB_1899', 14, 'AbrBar1873', 'Son', 1910, ''),
+('CAB_1901', 14, 'AbrBar1873', 'Daughter', 1910, ''),
+('SAB_1906', 14, 'AbrBar1873', 'Daughter', 1910, ''),
+('IAB_1909', 14, 'AbrBar1873', 'Son', 1910, ''),
+
+('AJB_1873', 5, 'AbrBar1873', 'Head', 1920, 'Skirt Manufacturer'),
+('RYA_1875', 5, 'AbrBar1873', 'Wife', 1920, ''),
+('JAB_1897', 5, 'AbrBar1873', 'Son', 1920, 'Lithograph Feeder'),
+('LAB_1899', 5, 'AbrBar1873', 'Son', 1920, 'Skirt Manufacturer'),
+('CAB_1901', 5, 'AbrBar1873', 'Daughter', 1920, 'Skirt Manufacturer'),
+('SAB_1906', 5, 'AbrBar1873', 'Daughter', 1920, 'Operator'),
+('IAB_1909', 5, 'AbrBar1873', 'Son', 1920, ''),
+('BAB_1912', 5, 'AbrBar1873', 'Son', 1920, ''),
+('LAB_1915', 5, 'AbrBar1873', 'Daughter', 1920, ''),
+('RAB_1919', 5, 'AbrBar1873', 'Daughter', 1920, ''),
+
+('AJB_1873', 18, 'AbrBar1873', 'Head', 1930, 'Contractor'),
+('RYA_1875', 18, 'AbrBar1873', 'Wife', 1930, ''),
+('IAB_1909', 18, 'AbrBar1873', 'Son', 1930, 'Presser'),
+('BAB_1912', 18, 'AbrBar1873', 'Son', 1930, 'Presser'),
+('LAB_1915', 18, 'AbrBar1873', 'Daughter', 1930, 'Dress Finisher'),
+('RAB_1919', 18, 'AbrBar1873', 'Daughter', 1930, '');
