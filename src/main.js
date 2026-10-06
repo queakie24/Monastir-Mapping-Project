@@ -111,7 +111,7 @@ function showAddressDetails(db, addressID, addressName) {
       const relation = member.relationToHead ? ` (${member.relationToHead})` : '';
       const birthyear = member.birthYear ? `b. ${member.birthYear}` : '';
       const birthplace = member.birthPlace ? `${member.birthPlace}` : '';
-      const occupation = member.occupation ? `${member.occupation}` : ''; //Readd <p>${occupation}</p> later
+      const occupation = member.occupation ? `${member.occupation}` : ''; //Read <p>${occupation}</p> later
 
       return `
         <div class="individual-card">
